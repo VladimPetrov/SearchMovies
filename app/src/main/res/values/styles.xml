@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="image_view_large">
+        <item name="android:layout_width">@dimen/width_image_view_large</item>
+        <item name="android:layout_height">@dimen/height_image_view_large</item>
+        <item name="android:tint">#E9E1E0</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="image_view_small">
+        <item name="android:layout_width">@dimen/width_image_view_small</item>
+        <item name="android:layout_height">@dimen/height_image_view_small</item>
+        <item name="android:tint">@color/image_view_color</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="detail_text_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/detail_margin_top</item>
+        <item name="android:layout_marginLeft">@dimen/detail_margin_left</item>
+        <item name="android:textSize">@dimen/detail_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="small_text_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/detail_margin_top</item>
+        <item name="android:layout_marginLeft">@dimen/detail_margin_left</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
+</resources>
