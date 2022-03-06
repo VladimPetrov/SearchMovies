@@ -1,5 +1,6 @@
 package ru.gb.searchmovies.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.gb.searchmovies.data.AppState
@@ -8,22 +9,22 @@ import ru.gb.searchmovies.data.Repository
 import java.lang.Thread.sleep
 
 class MainViewModel(
-    private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
+    private val mutableLiveData: MutableLiveData<AppState> = MutableLiveData(),
     private val repository: IRepository = Repository()
 ) : ViewModel() {
 
-    fun getLiveData() = liveDataToObserve
+    val liveDate: LiveData<AppState> get() = mutableLiveData
 
     fun getMovieFromLocalSource(isMovies: Boolean) = getDataFromLocalSource(isMovies)
 
     private fun getDataFromLocalSource(isMovies: Boolean) {
-        liveDataToObserve.postValue(AppState.Loading)
+        mutableLiveData.postValue(AppState.Loading)
         Thread {
-            sleep(2000)
+            sleep(1000)
             if (isMovies) {
-                liveDataToObserve.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
+                mutableLiveData.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
             } else {
-                liveDataToObserve.postValue(AppState.Success(repository.getMultFromLocalStorage()))
+                mutableLiveData.postValue(AppState.Success(repository.getMultFromLocalStorage()))
             }
         }.start()
     }

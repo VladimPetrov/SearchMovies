@@ -30,9 +30,7 @@ class MainFragmentAdapter(
         holder.bind(movieData[position])
     }
 
-    override fun getItemCount(): Int {
-        return movieData.size
-    }
+    override fun getItemCount() = movieData.size
 
     fun removeListener() {
         onItemViewClickListener = null
@@ -41,11 +39,13 @@ class MainFragmentAdapter(
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(movie: Movie) {
-            itemView.findViewById<TextView>(R.id.itemMovieName).text = movie.name
-            itemView.findViewById<TextView>(R.id.itemMovieGenre).text = movie.genre.toString()
-            itemView.findViewById<TextView>(R.id.itemMoviePopularity).text = movie.popularity
-            itemView.setOnClickListener {
-                onItemViewClickListener?.onItemClick(movie)
+            itemView.apply {
+                findViewById<TextView>(R.id.itemMovieName).text = movie.name
+                findViewById<TextView>(R.id.itemMovieGenre).text = movie.genre.toString()
+                findViewById<TextView>(R.id.itemMoviePopularity).text = movie.popularity
+                setOnClickListener {
+                    onItemViewClickListener?.onItemClick(movie)
+                }
             }
         }
     }
