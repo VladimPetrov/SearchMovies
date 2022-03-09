@@ -41,7 +41,7 @@ class MainFragmentAdapter(
         fun bind(movie: Movie) {
             itemView.apply {
                 findViewById<TextView>(R.id.itemMovieName).text = movie.name
-                findViewById<TextView>(R.id.itemMovieGenre).text = movie.genre.toString()
+                findViewById<TextView>(R.id.itemMovieGenre).text = movie.showGenres()
                 findViewById<TextView>(R.id.itemMoviePopularity).text = movie.popularity
                 setOnClickListener {
                     onItemViewClickListener?.onItemClick(movie)
