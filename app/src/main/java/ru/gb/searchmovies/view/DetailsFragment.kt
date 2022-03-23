@@ -12,10 +12,9 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.gson.annotations.SerializedName
-import ru.gb.searchmovies.data.Genre
-import ru.gb.searchmovies.data.Movie
-import ru.gb.searchmovies.data.MovieDTO
-import ru.gb.searchmovies.data.MovieLoader
+import ru.gb.searchmovies.DetailsMoviesService
+import ru.gb.searchmovies.ID_MOVIE_EXTRA
+import ru.gb.searchmovies.data.*
 import ru.gb.searchmovies.databinding.FragmentDetailBinding
 
 const val DETAILS_INTENT_FILTER = "DETAILS INTENT FILTER"
@@ -77,20 +76,26 @@ class DetailsFragment : Fragment() {
         )
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
                            movieBundle = movie
             }
-        binding.mainView.visibility = View.GONE
-        binding.loadingLayout.visibility = View.VISIBLE
         loadMovie()
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun loadMovie() {
-
+        binding.mainView.visibility = View.GONE
+        binding.loadingLayout.visibility = View.VISIBLE
+        context?.let {
+            it.startService(Intent(it, DetailsMoviesService::class.java).apply {
+                putExtra(
+                    ID_MOVIE_EXTRA,
+                    movieBundle.id.toString()
+                )
+            })
+        }
     }
 
     private fun displayMovieFromStrings( name: String?,
@@ -126,6 +131,7 @@ class DetailsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        context?.unregisterReceiver(loadResultsReceiver)
     }
 
     companion object {

@@ -20,6 +20,7 @@ const val ID_MOVIE_EXTRA = "ID MOVIE"
 class DetailsMoviesService(name: String = "DetailsMoviesService") : IntentService(name) {
     private val broadcastIntent = Intent(DETAILS_INTENT_FILTER)
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onHandleIntent(intent: Intent?) {
         if (intent == null) {
             onEmptyIntent()
