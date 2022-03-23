@@ -83,7 +83,6 @@ class DetailsMoviesService(name: String = "DetailsMoviesService") : IntentServic
         broadcastIntent.putExtra(DETAILS_NAME_EXTRA, movie.name)
         broadcastIntent.putExtra(DETAILS_GENRES_EXTRA, movie.showGenres())
         broadcastIntent.putExtra(DETAILS_RUNTIME_EXTRA, movie.runtime)
-        broadcastIntent.putExtra(DETAILS_RELEASE_DATE_EXTRA, movie.releaseDate)
         broadcastIntent.putExtra(DETAILS_POPULARITY_EXTRA, movie.popularity)
         broadcastIntent.putExtra(DETAILS_OVERVIEW_EXTRA, movie.overview)
         sendBroadcast(broadcastIntent)

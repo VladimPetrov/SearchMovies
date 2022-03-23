@@ -1,5 +1,9 @@
 package ru.gb.searchmovies.view
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.google.gson.annotations.SerializedName
+import ru.gb.searchmovies.data.Genre
 import ru.gb.searchmovies.data.Movie
 import ru.gb.searchmovies.data.MovieDTO
 import ru.gb.searchmovies.data.MovieLoader
@@ -24,22 +30,33 @@ const val DETAILS_RESPONSE_SUCCESS_EXTRA = "RESPONSE SUCCESS"
 const val DETAILS_NAME_EXTRA = "NAME MOVIE"
 const val DETAILS_GENRES_EXTRA = "GENRES MOVIE"
 const val DETAILS_RUNTIME_EXTRA = "RUNTIME MOVIE"
-const val DETAILS_RELEASE_DATE_EXTRA = "RELEASE DATE MOVIE"
 const val DETAILS_POPULARITY_EXTRA = "POPULARITY MOVIE"
 const val DETAILS_OVERVIEW_EXTRA = "OVERVIEW MOVIE"
+private const val PROCESS_ERROR = "Обработка ошибки"
 
 class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var movieBundle: Movie
-    private val loadListener  = object : MovieLoader.MovieLoaderListener {
-        override fun onLoaded(movieDTO: MovieDTO) {
-            displayMovie(movieDTO)
-        }
-
-        override fun onFailed(throwable: Throwable) {
-            TODO("Not yet implemented")
+    private val loadResultsReceiver:BroadcastReceiver = object : BroadcastReceiver(){
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.getStringExtra(DETAILS_LOAD_RESULT_EXTRA)) {
+                DETAILS_INTENT_EMPTY_EXTRA -> TODO(PROCESS_ERROR)
+                DETAILS_DATA_EMPTY_EXTRA -> TODO(PROCESS_ERROR)
+                DETAILS_RESPONSE_EMPTY_EXTRA -> TODO(PROCESS_ERROR)
+                DETAILS_REQUEST_ERROR_EXTRA -> TODO(PROCESS_ERROR)
+                DETAILS_REQUEST_ERROR_MESSAGE_EXTRA -> TODO(PROCESS_ERROR)
+                DETAILS_URL_MALFORMED_EXTRA -> TODO(PROCESS_ERROR)
+                DETAILS_RESPONSE_SUCCESS_EXTRA -> displayMovieFromStrings(
+                            intent.getStringExtra(DETAILS_NAME_EXTRA),
+                            intent.getStringExtra(DETAILS_GENRES_EXTRA),
+                            intent.getStringExtra(DETAILS_RUNTIME_EXTRA),
+                            intent.getStringExtra(DETAILS_POPULARITY_EXTRA),
+                            intent.getStringExtra(DETAILS_OVERVIEW_EXTRA)
+                        )
+                else -> TODO(PROCESS_ERROR)
+            }
         }
     }
 
@@ -50,6 +67,14 @@ class DetailsFragment : Fragment() {
     ): View? {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        context?.registerReceiver(
+            loadResultsReceiver,
+            IntentFilter(DETAILS_INTENT_FILTER)
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -65,8 +90,24 @@ class DetailsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun loadMovie() {
-        val movieLoader = MovieLoader(loadListener, movieBundle.id)
-        movieLoader.loadMovie()
+
+    }
+
+    private fun displayMovieFromStrings( name: String?,
+                                        genres: String?,
+                                        runtime: String?,
+                                        popularity: String?,
+                                        overview: String?) {
+        with(binding) {
+            mainView.visibility = View.VISIBLE
+            loadingLayout.visibility = View.GONE
+
+            movieName.text = name
+            genreTextView.text = genres
+            popularityTextView.text = popularity
+            timeTextView.text = runtime
+            titleMovieTextView.text = overview
+        }
     }
 
     private fun displayMovie(movieDTO: MovieDTO) {
@@ -91,11 +132,6 @@ class DetailsFragment : Fragment() {
 
         const val BUNDLE_EXTRA = "movies"
 
-        fun newInstance(bundle: Bundle): DetailsFragment {
-            val fragment = DetailsFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 
 }
