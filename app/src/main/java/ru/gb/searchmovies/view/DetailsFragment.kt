@@ -24,13 +24,14 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movie = arguments?.getParcelable<Movie>(BUNDLE_EXTRA)
-        if (movie != null) {
-            binding.movieName.text = movie.name
-            binding.genreTextView.text = movie.genre.toString()
-            binding.popularityTextView.text = movie.popularity
-            binding.timeTextView.text = movie.time
-            binding.titleMovieTextView.text = movie.title
+            arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
+            with(binding) {
+                movieName.text = movie.name
+                genreTextView.text = movie.genre.toString()
+                popularityTextView.text = movie.popularity
+                timeTextView.text = movie.time
+                titleMovieTextView.text = movie.title
+            }
         }
     }
 
