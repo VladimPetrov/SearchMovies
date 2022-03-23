@@ -12,6 +12,22 @@ import ru.gb.searchmovies.data.MovieDTO
 import ru.gb.searchmovies.data.MovieLoader
 import ru.gb.searchmovies.databinding.FragmentDetailBinding
 
+const val DETAILS_INTENT_FILTER = "DETAILS INTENT FILTER"
+const val DETAILS_LOAD_RESULT_EXTRA = "LOAD RESULT"
+const val DETAILS_INTENT_EMPTY_EXTRA = "INTENT IS EMPTY"
+const val DETAILS_DATA_EMPTY_EXTRA = "DATA IS EMPTY"
+const val DETAILS_RESPONSE_EMPTY_EXTRA = "RESPONSE IS EMPTY"
+const val DETAILS_REQUEST_ERROR_EXTRA = "REQUEST ERROR"
+const val DETAILS_REQUEST_ERROR_MESSAGE_EXTRA = "REQUEST ERROR MESSAGE"
+const val DETAILS_URL_MALFORMED_EXTRA = "URL MALFORMED"
+const val DETAILS_RESPONSE_SUCCESS_EXTRA = "RESPONSE SUCCESS"
+const val DETAILS_NAME_EXTRA = "NAME MOVIE"
+const val DETAILS_GENRES_EXTRA = "GENRES MOVIE"
+const val DETAILS_RUNTIME_EXTRA = "RUNTIME MOVIE"
+const val DETAILS_RELEASE_DATE_EXTRA = "RELEASE DATE MOVIE"
+const val DETAILS_POPULARITY_EXTRA = "POPULARITY MOVIE"
+const val DETAILS_OVERVIEW_EXTRA = "OVERVIEW MOVIE"
+
 class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
@@ -73,7 +89,7 @@ class DetailsFragment : Fragment() {
 
     companion object {
 
-        const val BUNDLE_EXTRA = "weather"
+        const val BUNDLE_EXTRA = "movies"
 
         fun newInstance(bundle: Bundle): DetailsFragment {
             val fragment = DetailsFragment()
