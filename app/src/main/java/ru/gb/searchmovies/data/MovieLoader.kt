@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
 import ru.gb.searchmovies.BuildConfig
+import ru.gb.searchmovies.data.dto.MovieDTO
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.MalformedURLException

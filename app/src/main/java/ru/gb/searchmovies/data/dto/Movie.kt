@@ -1,9 +1,7 @@
-package ru.gb.searchmovies.data
+package ru.gb.searchmovies.data.dto
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.util.*
-import kotlin.collections.ArrayList
 
 @Parcelize
 data class Movie(

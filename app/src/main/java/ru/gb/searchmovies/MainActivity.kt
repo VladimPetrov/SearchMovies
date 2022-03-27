@@ -3,7 +3,7 @@ package ru.gb.searchmovies
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.gb.searchmovies.databinding.ActivityMainBinding
-import ru.gb.searchmovies.view.MainFragment
+import ru.gb.searchmovies.presentation.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

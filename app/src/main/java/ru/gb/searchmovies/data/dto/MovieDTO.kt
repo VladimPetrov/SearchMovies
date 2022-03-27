@@ -1,4 +1,4 @@
-package ru.gb.searchmovies.data
+package ru.gb.searchmovies.data.dto
 
 import com.google.gson.annotations.SerializedName
 
@@ -24,4 +24,11 @@ data class MovieDTO(
         result += genres.last().name
         return result
     }
+}
+
+fun convertDtoToModel(movieDTO: MovieDTO): Movie {
+    val fact: MovieDTO = movieDTO!!
+    return Movie(fact.id!!, fact.name!!, fact.genres, fact.runtime!!,
+            fact.releaseDate!!,fact.popularity!!,fact.overview!!)
+
 }

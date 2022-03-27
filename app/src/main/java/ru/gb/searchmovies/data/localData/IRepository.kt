@@ -1,4 +1,6 @@
-package ru.gb.searchmovies.data
+package ru.gb.searchmovies.data.localData
+
+import ru.gb.searchmovies.data.dto.Movie
 
 interface IRepository {
     fun getMovieFromServer(): Movie

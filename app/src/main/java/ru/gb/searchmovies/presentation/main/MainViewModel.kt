@@ -1,11 +1,11 @@
-package ru.gb.searchmovies.viewmodel
+package ru.gb.searchmovies.presentation.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.gb.searchmovies.data.AppState
-import ru.gb.searchmovies.data.IRepository
-import ru.gb.searchmovies.data.Repository
+import ru.gb.searchmovies.data.states.AppState
+import ru.gb.searchmovies.data.localData.IRepository
+import ru.gb.searchmovies.data.localData.Repository
 import java.lang.Thread.sleep
 
 class MainViewModel(
