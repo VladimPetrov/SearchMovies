@@ -1,7 +1,9 @@
 package ru.gb.searchmovies.data.details
 
-import okhttp3.Callback
+import retrofit2.Callback
+import ru.gb.searchmovies.data.dto.MovieDTO
+
 
 interface IDetailsRepository {
-    fun getMovieDetailsFromServer (requestLink: String, callback : Callback)
+    fun getMovieDetailsFromServer (idMovie : Int, callback : Callback<MovieDTO>)
 }

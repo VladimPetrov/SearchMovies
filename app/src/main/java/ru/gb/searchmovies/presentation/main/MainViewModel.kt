@@ -20,7 +20,7 @@ class MainViewModel(
     private fun getDataFromLocalSource(isMovies: Boolean) {
         mutableLiveData.postValue(AppState.Loading)
         Thread {
-            sleep(1000)
+            sleep(100)
             if (isMovies) {
                 mutableLiveData.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
             } else {

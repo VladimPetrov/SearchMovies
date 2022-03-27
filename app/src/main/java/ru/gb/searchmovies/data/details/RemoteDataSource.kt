@@ -1,16 +1,25 @@
 package ru.gb.searchmovies.data.details
 
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import ru.gb.searchmovies.BuildConfig
+import com.google.gson.GsonBuilder
+
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import ru.gb.searchmovies.data.dto.MovieDTO
 
 class RemoteDataSource {
-    fun getWeatherDetails(requestLink: String, callback: Callback){
-        val builder: Request.Builder = Request.Builder().apply {
-            url(requestLink+"?api_key=${BuildConfig.API_KEY}&language=ru-RU")
-        }
-        OkHttpClient().newCall(builder.build()).enqueue(callback)
 
+    private val movieApi = Retrofit.Builder()
+        .baseUrl("https://api.themoviedb.org/")
+        .addConverterFactory(
+            GsonConverterFactory.create(
+                GsonBuilder().setLenient().create()
+            )
+        )
+        .build().create(MovieApi::class.java)
+
+
+    fun getMovieDetails(idMovie: Int, callback: Callback<MovieDTO>) {
+        movieApi.getMovie(idMovie).enqueue(callback)
     }
 }

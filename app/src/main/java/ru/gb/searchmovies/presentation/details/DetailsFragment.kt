@@ -14,8 +14,6 @@ import ru.gb.searchmovies.data.states.AppState
 import ru.gb.searchmovies.databinding.FragmentDetailBinding
 import ru.gb.searchmovies.showSnackBar
 
-private const val MAIN_LINK = "https://api.themoviedb.org/3/movie/"
-
 class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
@@ -50,7 +48,7 @@ class DetailsFragment : Fragment() {
     private fun loadMovie() {
         binding.mainView.visibility = View.GONE
         binding.loadingLayout.visibility = View.VISIBLE
-        viewModel.getMovieFromRemoteSource(MAIN_LINK+"${movieBundle.id}")
+        viewModel.getMovieFromRemoteSource(movieBundle.id)
     }
 
     private fun renderData(appState: AppState) {
@@ -70,7 +68,7 @@ class DetailsFragment : Fragment() {
                 binding.mainView.showSnackBar(
                     getString(R.string.error),
                 getString(R.string.reload),{
-                    viewModel.getMovieFromRemoteSource(MAIN_LINK+"${movieBundle.id}")
+                    viewModel.getMovieFromRemoteSource(movieBundle.id)
                     })
             }
         }
