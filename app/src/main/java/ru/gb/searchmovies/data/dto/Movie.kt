@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class Movie(
     val id: Int = 278,
     val name: String = "Побег из Шоушенка",
+    val posterPath: String = "",
     val genres: List<Genre> = (listOf<Genre>(Genre(28 , "Action"))),
     val runtime: String = "142 мин.",
     val releaseDate: String = "1994",
@@ -32,6 +33,7 @@ fun getMovieList() = listOf(
     Movie(
         278,
         "Побег из Шоушенка",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("драма")),
         "142 мин.",
@@ -46,6 +48,7 @@ fun getMovieList() = listOf(
     Movie(
         497,
         "Зеленая миля",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("драма", "криминал")),
         "189 мин.",
@@ -59,6 +62,7 @@ fun getMovieList() = listOf(
     Movie(
         122,
         "Властелин колец: Возвращение короля",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("фэнтези", "приключения", "драма")),
         "201 мин.",
@@ -70,6 +74,7 @@ fun getMovieList() = listOf(
     Movie(
         121,
         "Властелин колец: Две крепости",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("фэнтези", "приключения", "драма")),
         "179 мин.",
@@ -81,6 +86,7 @@ fun getMovieList() = listOf(
     Movie(
         424,
         "Список Шиндлера",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("история", "биография", "военный", "драма")),
         "195 мин.",
@@ -92,6 +98,7 @@ fun getMovieList() = listOf(
     Movie(
         120,
         "Властелин колец: Братство Кольца",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("фэнтези", "приключения", "драма")),
         "178 мин.",
@@ -106,6 +113,7 @@ fun getMovieList() = listOf(
     Movie(
         13,
         "Форрест Гамп",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("драма", "комедия", "мелодрама", "история", "военный")),
         "142 мин.",
@@ -122,6 +130,7 @@ fun getMultList() = listOf(
     Movie(
         72215,
         "Жил-был пёс",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("мультфильм", "комедия", "короткометражка", "семейный")),
         "10 мин.",
@@ -132,6 +141,7 @@ fun getMultList() = listOf(
     Movie(
         77294,
         "Трое из Простоквашино",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("мультфильм", "детский", "короткометражка", "семейный")),
         "19 мин.",
@@ -142,6 +152,7 @@ fun getMultList() = listOf(
     Movie(
         8587,
         "Король Лев",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("мультфильм", "мюзикл", "драма", "приключения", "семейный")),
         "88 мин.",
@@ -152,6 +163,7 @@ fun getMultList() = listOf(
     Movie(
         36161,
         "Винни Пух",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("мультфильм", "детский", "короткометражка", "семейный")),
         "11 мин.",
@@ -162,6 +174,7 @@ fun getMultList() = listOf(
     Movie(
         77762,
         "Зима в Простоквашино",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("мультфильм", "детский", "короткометражка", "семейный")),
         "15 мин.",
@@ -172,6 +185,7 @@ fun getMultList() = listOf(
     Movie(
         36163,
         "Винни Пух идет в гости",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("мультфильм", "детский", "короткометражка", "семейный")),
         "11 мин.",
@@ -182,6 +196,7 @@ fun getMultList() = listOf(
     Movie(
         77759,
         "Каникулы в Простоквашино",
+        "",
         listOf<Genre>(Genre(28 , "Action")),
         //Genre(listOf("мультфильм", "детский", "короткометражка", "семейный")),
         "18 мин.",

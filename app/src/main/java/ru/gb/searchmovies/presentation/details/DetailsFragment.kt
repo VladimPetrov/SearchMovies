@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.dto.Movie
 import ru.gb.searchmovies.data.states.AppState
@@ -84,6 +85,14 @@ class DetailsFragment : Fragment() {
             popularityTextView.text = movie.popularity
             timeTextView.text = movie.runtime
             titleMovieTextView.text = movie.overview
+            if (!(movie.posterPath.isNullOrEmpty())) {
+                context?.let {
+                    Glide.with(it)
+                        .load("https://www.themoviedb.org/t/p/w220_and_h330_face"+movie.posterPath)
+                        .override(200, 300)
+                        .into(binding.posterMovie)
+                }
+            }
         }
     }
 
