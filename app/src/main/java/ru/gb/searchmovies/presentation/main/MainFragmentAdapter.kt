@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.dto.Movie
+import ru.gb.searchmovies.data.dto.MovieDTO
 
 class MainFragmentAdapter(
     private var onItemViewClickListener: MainFragment.onOnItemViewClickListener?
@@ -27,6 +28,7 @@ class MainFragmentAdapter(
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        //holder.bind(movieData[position])
         holder.bind(movieData[position])
     }
 

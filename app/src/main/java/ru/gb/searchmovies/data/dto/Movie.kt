@@ -20,7 +20,9 @@ data class Movie(
 ) : Parcelable
 {
     fun showGenres(): String {
-        var result: String = ""
+        var result = ""
+        if (genres.isEmpty()) return result
+        if (genres.count() == 1) return genres.last().name
         for (i in 0..(genres.count() - 2)) {
             result += genres.get(i).name + ", "
         }

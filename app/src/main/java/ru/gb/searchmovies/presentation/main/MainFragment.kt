@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.states.AppState
 import ru.gb.searchmovies.data.dto.Movie
+import ru.gb.searchmovies.data.dto.MovieDTO
 import ru.gb.searchmovies.databinding.FragmentMainBinding
 import ru.gb.searchmovies.hide
 import ru.gb.searchmovies.presentation.details.DetailsFragment

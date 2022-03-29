@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.dto.Movie
+import ru.gb.searchmovies.data.dto.MovieDTO
 import ru.gb.searchmovies.data.states.AppState
 import ru.gb.searchmovies.databinding.FragmentDetailBinding
 import ru.gb.searchmovies.showSnackBar
