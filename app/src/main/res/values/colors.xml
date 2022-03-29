@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="image_view_color">#C6817C</color>
     <color name="loadingBackground">#80AA645F</color>
+    <color name="colorPrimary">#816866</color>
 </resources>
