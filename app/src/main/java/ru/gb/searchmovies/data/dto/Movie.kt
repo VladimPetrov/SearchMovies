@@ -3,6 +3,8 @@ package ru.gb.searchmovies.data.dto
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+const val URL_POSTER="https://www.themoviedb.org/t/p/w220_and_h330_face"
+
 @Parcelize
 data class Movie(
     val id: Int = 278,

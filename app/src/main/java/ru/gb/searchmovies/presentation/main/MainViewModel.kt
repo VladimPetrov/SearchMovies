@@ -63,7 +63,7 @@ class MainViewModel(
         mutableLiveData.postValue(AppState.Loading)
             if (isMovies) {
                 //mutableLiveData.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
-                repository.getMovieListFromServer("боевик",callback)
+                repository.getMovieListFromServer("приключения",callback)
             } else {
                 repository.getMovieListFromServer("мультфильм",callback)
             }

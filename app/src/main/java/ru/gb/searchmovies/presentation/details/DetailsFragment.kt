@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.dto.Movie
 import ru.gb.searchmovies.data.dto.MovieDTO
+import ru.gb.searchmovies.data.dto.URL_POSTER
 import ru.gb.searchmovies.data.states.AppState
 import ru.gb.searchmovies.databinding.FragmentDetailBinding
 import ru.gb.searchmovies.showSnackBar
@@ -89,7 +90,7 @@ class DetailsFragment : Fragment() {
             if (!(movie.posterPath.isNullOrEmpty())) {
                 context?.let {
                     Glide.with(it)
-                        .load("https://www.themoviedb.org/t/p/w220_and_h330_face"+movie.posterPath)
+                        .load(URL_POSTER+movie.posterPath)
                         .override(200, 300)
                         .into(binding.posterMovie)
                 }

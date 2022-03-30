@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.dto.Movie
-import ru.gb.searchmovies.data.dto.MovieDTO
+import ru.gb.searchmovies.data.dto.URL_POSTER
 
 class MainFragmentAdapter(
     private var onItemViewClickListener: MainFragment.onOnItemViewClickListener?
@@ -28,7 +29,6 @@ class MainFragmentAdapter(
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        //holder.bind(movieData[position])
         holder.bind(movieData[position])
     }
 
@@ -42,6 +42,14 @@ class MainFragmentAdapter(
 
         fun bind(movie: Movie) {
             itemView.apply {
+                if (!(movie.posterPath.isNullOrEmpty())) {
+                    context?.let {
+                        Glide.with(it)
+                            .load(URL_POSTER+movie.posterPath)
+                            .override(80, 120)
+                            .into(findViewById(R.id.posterMovie))
+                    }
+                }
                 findViewById<TextView>(R.id.itemMovieName).text = movie.name
                 findViewById<TextView>(R.id.itemMovieGenre).text = movie.showGenres()
                 findViewById<TextView>(R.id.itemMoviePopularity).text = movie.popularity
