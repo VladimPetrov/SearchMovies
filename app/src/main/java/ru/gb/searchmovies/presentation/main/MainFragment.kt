@@ -1,4 +1,4 @@
-package ru.gb.searchmovies.view
+package ru.gb.searchmovies.presentation.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,15 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.google.android.material.snackbar.Snackbar
 import ru.gb.searchmovies.R
-import ru.gb.searchmovies.data.AppState
-import ru.gb.searchmovies.data.Movie
+import ru.gb.searchmovies.data.states.AppState
+import ru.gb.searchmovies.data.dto.Movie
 import ru.gb.searchmovies.databinding.FragmentMainBinding
 import ru.gb.searchmovies.hide
+import ru.gb.searchmovies.presentation.details.DetailsFragment
 import ru.gb.searchmovies.show
 import ru.gb.searchmovies.showSnackBar
-import ru.gb.searchmovies.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 
@@ -65,7 +64,7 @@ class MainFragment : Fragment() {
             is AppState.Loading -> {
                 binding.mainFragmentLoadingLayout.show()
             }
-            is AppState.Error -> {
+            else -> {
                 binding.mainFragmentLoadingLayout.hide()
                 binding.mainFragmentFAB.showSnackBar(
                     text = R.string.error,
