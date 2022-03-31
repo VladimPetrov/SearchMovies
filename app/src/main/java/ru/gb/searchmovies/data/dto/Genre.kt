@@ -1,4 +1,4 @@
-package ru.gb.searchmovies.data
+package ru.gb.searchmovies.data.dto
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
