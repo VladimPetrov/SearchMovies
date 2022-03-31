@@ -42,10 +42,10 @@ class MainFragmentAdapter(
 
         fun bind(movie: Movie) {
             itemView.apply {
-                if (!(movie.posterPath.isNullOrEmpty())) {
+                if (movie.posterPath.isNotEmpty()) {
                     context?.let {
                         Glide.with(it)
-                            .load(URL_POSTER+movie.posterPath)
+                            .load(URL_POSTER + movie.posterPath)
                             .override(80, 120)
                             .into(findViewById(R.id.posterMovie))
                     }

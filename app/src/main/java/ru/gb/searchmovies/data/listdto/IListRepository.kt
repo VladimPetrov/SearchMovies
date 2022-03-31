@@ -5,5 +5,5 @@ import ru.gb.searchmovies.data.dto.ListMovieApi
 import ru.gb.searchmovies.data.dto.MovieDTO
 
 interface IListRepository {
-    fun  getMovieListFromServer (query : String, callback: Callback<ListMovieApi>)
+    fun getMovieListFromServer(query: String, callback: Callback<ListMovieApi>)
 }

@@ -17,20 +17,13 @@ data class MovieDTO(
     val overview: String?
 
 )
-{
-    fun showGenres(): String {
-        var result: String = ""
-        for (i in 0..(genres.count() - 2)) {
-            result += genres.get(i).name + ", "
-        }
-        result += genres.last().name
-        return result
-    }
-}
+
 
 fun convertDtoToModel(movieDTO: MovieDTO): Movie {
-    val fact: MovieDTO = movieDTO!!
-    return Movie(fact.id!!, fact.name!!, fact.posterPath!!,fact.genres, fact.runtime!!,
-            fact.releaseDate!!,fact.popularity!!,fact.overview!!)
+    val fact: MovieDTO = movieDTO
+    return Movie(
+        fact.id!!, fact.name!!, fact.posterPath!!, fact.genres, fact.runtime!!,
+        fact.releaseDate!!, fact.popularity!!, fact.overview!!
+    )
 
 }

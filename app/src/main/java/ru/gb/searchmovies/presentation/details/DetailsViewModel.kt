@@ -18,10 +18,11 @@ private const val SERVER_ERROR = "Ошибка сервера"
 private const val REQUEST_ERROR = "Ошибка запроса на сервер"
 private const val CORRUPTED_DATA = "Неполные данные"
 
-class DetailsViewModel (private val detailsLiveData : MutableLiveData<AppState> = MutableLiveData(),
-                        private val detailsRepository: IDetailsRepository =
-                            DetailsRepository(RemoteDataSource())
-):ViewModel() {
+class DetailsViewModel(
+    private val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
+    private val detailsRepository: IDetailsRepository =
+        DetailsRepository(RemoteDataSource())
+) : ViewModel() {
     val liveDate: LiveData<AppState> get() = detailsLiveData
 
     fun getMovieFromRemoteSource(idMovie: Int) {
@@ -48,10 +49,10 @@ class DetailsViewModel (private val detailsLiveData : MutableLiveData<AppState> 
     }
 
     private fun checkResponse(serverResponse: MovieDTO): AppState {
-        val fact = serverResponse
-        return if (fact?.id == null || fact.name.isNullOrEmpty()
-            || fact.genres.isEmpty() || fact.runtime.isNullOrEmpty() || fact.releaseDate.isNullOrEmpty()
-            || fact.popularity.isNullOrEmpty() || fact.overview.isNullOrEmpty()) {
+        return if (serverResponse.id == null || serverResponse.name.isNullOrEmpty()
+            || serverResponse.genres.isEmpty() || serverResponse.runtime.isNullOrEmpty() || serverResponse.releaseDate.isNullOrEmpty()
+            || serverResponse.popularity.isNullOrEmpty() || serverResponse.overview.isNullOrEmpty()
+        ) {
             AppState.Error(Throwable(CORRUPTED_DATA))
         } else {
             AppState.SuccessDetails(convertDtoToModel(serverResponse))

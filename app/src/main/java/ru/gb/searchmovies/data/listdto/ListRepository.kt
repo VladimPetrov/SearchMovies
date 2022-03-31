@@ -5,8 +5,8 @@ import ru.gb.searchmovies.data.details.RemoteDataSource
 import ru.gb.searchmovies.data.dto.ListMovieApi
 import ru.gb.searchmovies.data.dto.MovieDTO
 
-class ListRepository(private val remoteDataSource: RemoteDataSource):IListRepository {
+class ListRepository(private val remoteDataSource: RemoteDataSource) : IListRepository {
     override fun getMovieListFromServer(query: String, callback: Callback<ListMovieApi>) {
-        remoteDataSource.getMovieList(query,callback)
+        remoteDataSource.getMovieList(query, callback)
     }
 }

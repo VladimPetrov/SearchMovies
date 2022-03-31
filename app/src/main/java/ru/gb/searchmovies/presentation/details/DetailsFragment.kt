@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.dto.Movie
-import ru.gb.searchmovies.data.dto.MovieDTO
 import ru.gb.searchmovies.data.dto.URL_POSTER
 import ru.gb.searchmovies.data.states.AppState
 import ru.gb.searchmovies.databinding.FragmentDetailBinding
@@ -31,7 +30,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -39,10 +38,10 @@ class DetailsFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
-                           movieBundle = movie
-            }
-        viewModel.liveDate.observe(viewLifecycleOwner,{ appState ->
+        arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
+            movieBundle = movie
+        }
+        viewModel.liveDate.observe(viewLifecycleOwner, { appState ->
             renderData(appState)
         })
         loadMovie()
@@ -65,13 +64,13 @@ class DetailsFragment : Fragment() {
                 binding.mainView.visibility = View.GONE
                 binding.loadingLayout.visibility = View.VISIBLE
             }
-           else -> {
+            else -> {
                 binding.mainView.visibility = View.VISIBLE
                 binding.loadingLayout.visibility = View.GONE
                 binding.mainView.showSnackBar(
                     getString(R.string.error),
-                getString(R.string.reload),{
-                    viewModel.getMovieFromRemoteSource(movieBundle.id)
+                    getString(R.string.reload), {
+                        viewModel.getMovieFromRemoteSource(movieBundle.id)
                     })
             }
         }
@@ -87,10 +86,10 @@ class DetailsFragment : Fragment() {
             popularityTextView.text = movie.popularity
             timeTextView.text = movie.runtime
             titleMovieTextView.text = movie.overview
-            if (!(movie.posterPath.isNullOrEmpty())) {
+            if (movie.posterPath.isNotEmpty()) {
                 context?.let {
                     Glide.with(it)
-                        .load(URL_POSTER+movie.posterPath)
+                        .load(URL_POSTER + movie.posterPath)
                         .override(200, 300)
                         .into(binding.posterMovie)
                 }
@@ -104,9 +103,6 @@ class DetailsFragment : Fragment() {
     }
 
     companion object {
-
         const val BUNDLE_EXTRA = "movies"
-
     }
-
 }

@@ -6,11 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.states.AppState
 import ru.gb.searchmovies.data.dto.Movie
-import ru.gb.searchmovies.data.dto.MovieDTO
 import ru.gb.searchmovies.databinding.FragmentMainBinding
 import ru.gb.searchmovies.hide
 import ru.gb.searchmovies.presentation.details.DetailsFragment
@@ -52,7 +50,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.mainFragmentRecyclerView.adapter = adapter
         binding.mainFragmentFAB.setOnClickListener { changeMovieDataset() }
-        viewModel.liveDate.observe(viewLifecycleOwner, Observer { renderData(it) })
+        viewModel.liveDate.observe(viewLifecycleOwner, { renderData(it) })
         viewModel.getMovieFromLocalSource(isDataSetMovie)
     }
 

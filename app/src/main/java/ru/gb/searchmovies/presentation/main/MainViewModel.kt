@@ -11,10 +11,6 @@ import ru.gb.searchmovies.data.dto.*
 import ru.gb.searchmovies.data.listdto.IListRepository
 import ru.gb.searchmovies.data.listdto.ListRepository
 import ru.gb.searchmovies.data.states.AppState
-import ru.gb.searchmovies.data.localData.IRepository
-import ru.gb.searchmovies.data.localData.Repository
-
-import java.lang.Thread.sleep
 
 private const val SERVER_ERROR = "Ошибка сервера"
 private const val REQUEST_ERROR = "Ошибка запроса на сервер"
@@ -28,7 +24,7 @@ class MainViewModel(
 
     val liveDate: LiveData<AppState> get() = mutableLiveData
 
-    private val callback = object : Callback <ListMovieApi> {
+    private val callback = object : Callback<ListMovieApi> {
         override fun onResponse(call: Call<ListMovieApi>, response: Response<ListMovieApi>) {
             val serverResponse: ListMovieApi? = response.body()
             mutableLiveData.postValue(
@@ -45,14 +41,10 @@ class MainViewModel(
         }
     }
 
-
     fun getMovieFromLocalSource(isMovies: Boolean) = getDataFromLocalSource(isMovies)
 
-
-
     private fun checkResponse(serverResponse: ListMovieApi): AppState {
-        val fact = serverResponse
-        return if (fact?.listMoveApi.isEmpty()) {
+        return if (serverResponse.listMoveApi.isEmpty()) {
             AppState.Error(Throwable(CORRUPTED_DATA))
         } else {
             AppState.Success(convertListApiToListModel(serverResponse))
@@ -61,12 +53,12 @@ class MainViewModel(
 
     private fun getDataFromLocalSource(isMovies: Boolean) {
         mutableLiveData.postValue(AppState.Loading)
-            if (isMovies) {
-                //mutableLiveData.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
-                repository.getMovieListFromServer("приключения",callback)
-            } else {
-                repository.getMovieListFromServer("мультфильм",callback)
-            }
+        if (isMovies) {
+            //mutableLiveData.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
+            repository.getMovieListFromServer("приключения", callback)
+        } else {
+            repository.getMovieListFromServer("мультфильм", callback)
+        }
     }
 
 
