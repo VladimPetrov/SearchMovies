@@ -89,7 +89,7 @@ class DetailsFragment : Fragment() {
             if (movie.posterPath.isNotEmpty()) {
                 context?.let {
                     Glide.with(it)
-                        .load(URL_POSTER + movie.posterPath)
+                        .load(movie.getPosterUrl())
                         .override(200, 300)
                         .into(binding.posterMovie)
                 }

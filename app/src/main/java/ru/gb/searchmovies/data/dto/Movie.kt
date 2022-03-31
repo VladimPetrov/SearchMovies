@@ -30,6 +30,9 @@ data class Movie(
         result += genres.last().name
         return result
     }
+    fun getPosterUrl(): String {
+        return "https://www.themoviedb.org/t/p/w220_and_h330_face$posterPath"
+    }
 }
 
 fun getMovieList() = listOf(

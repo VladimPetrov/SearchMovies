@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.gb.searchmovies.R
 import ru.gb.searchmovies.data.dto.Movie
-import ru.gb.searchmovies.data.dto.URL_POSTER
 
 class MainFragmentAdapter(
     private var onItemViewClickListener: MainFragment.onOnItemViewClickListener?
@@ -45,7 +44,7 @@ class MainFragmentAdapter(
                 if (movie.posterPath.isNotEmpty()) {
                     context?.let {
                         Glide.with(it)
-                            .load(URL_POSTER + movie.posterPath)
+                            .load(movie.getPosterUrl())
                             .override(80, 120)
                             .into(findViewById(R.id.posterMovie))
                     }
