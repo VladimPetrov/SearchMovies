@@ -23,7 +23,7 @@ class RemoteDataSource {
     fun getMovieDetails(idMovie: Int, callback: Callback<MovieDTO>) {
         movieApi.getMovie(idMovie).enqueue(callback)
     }
-    fun getMovieList(query : String, callback: Callback<ListMovieApi>) {
-        movieApi.getListMovie(query = query).enqueue(callback)
+    fun getMovieList(query : String, isAdultMovie:Boolean, callback: Callback<ListMovieApi>) {
+        movieApi.getListMovie(query = query,includeAdult = isAdultMovie.toString()).enqueue(callback)
     }
 }

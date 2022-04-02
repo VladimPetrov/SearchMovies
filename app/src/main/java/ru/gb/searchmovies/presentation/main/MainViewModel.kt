@@ -41,7 +41,7 @@ class MainViewModel(
         }
     }
 
-    fun getMovieFromLocalSource(isMovies: Boolean) = getDataFromLocalSource(isMovies)
+    fun getMovieFromLocalSource(isMovies: Boolean,isAdultMovie:Boolean) = getDataFromLocalSource(isMovies,isAdultMovie)
 
     private fun checkResponse(serverResponse: ListMovieApi): AppState {
         return if (serverResponse.listMoveApi.isEmpty()) {
@@ -51,13 +51,13 @@ class MainViewModel(
         }
     }
 
-    private fun getDataFromLocalSource(isMovies: Boolean) {
+    private fun getDataFromLocalSource(isMovies: Boolean,isAdultMovie:Boolean) {
         mutableLiveData.postValue(AppState.Loading)
         if (isMovies) {
             //mutableLiveData.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
-            repository.getMovieListFromServer("приключения", callback)
+            repository.getMovieListFromServer("приключения", isAdultMovie, callback)
         } else {
-            repository.getMovieListFromServer("мультфильм", callback)
+            repository.getMovieListFromServer("мультфильм", isAdultMovie, callback)
         }
     }
 

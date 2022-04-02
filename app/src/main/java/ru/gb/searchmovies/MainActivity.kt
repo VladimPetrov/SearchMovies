@@ -2,6 +2,7 @@ package ru.gb.searchmovies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import ru.gb.searchmovies.databinding.ActivityMainBinding
 import ru.gb.searchmovies.presentation.main.MainFragment
 
