@@ -12,6 +12,7 @@ import ru.gb.searchmovies.data.dto.Movie
 import ru.gb.searchmovies.databinding.FragmentMainBinding
 import ru.gb.searchmovies.hide
 import ru.gb.searchmovies.presentation.details.DetailsFragment
+import ru.gb.searchmovies.presentation.history.HistoryFragment
 import ru.gb.searchmovies.show
 import ru.gb.searchmovies.showSnackBar
 
@@ -40,26 +41,39 @@ class MainFragment : Fragment() {
     })
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.options_menu, menu)
+        inflater.inflate(R.menu.min_screen_menu, menu)
         activity?.let {
-            isAdultMovie = it.getPreferences(Context.MODE_PRIVATE).getBoolean(SharedPrefsConstants.IS_ADULT_KEY,true)
+            isAdultMovie = it.getPreferences(Context.MODE_PRIVATE)
+                .getBoolean(SharedPrefsConstants.IS_ADULT_KEY, true)
         }
         menu.findItem(R.id.option_menu_item_adult).isChecked = isAdultMovie
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.option_menu_item_adult) {
-            item.isChecked = !item.isChecked
-            val sharedPrefs = activity?.getPreferences(Context.MODE_PRIVATE)
-            val editor = sharedPrefs?.edit()
-            editor?.let {
-                it.putBoolean(SharedPrefsConstants.IS_ADULT_KEY,isAdultMovie)
-                it.apply()
+        return when (item.itemId) {
+            R.id.option_menu_item_adult -> {
+                item.isChecked = !item.isChecked
+                val sharedPrefs = activity?.getPreferences(Context.MODE_PRIVATE)
+                val editor = sharedPrefs?.edit()
+                editor?.let {
+                    it.putBoolean(SharedPrefsConstants.IS_ADULT_KEY, isAdultMovie)
+                    it.apply()
+                }
+                loadMovies()
+                true
             }
-            loadMovies()
+            R.id.option_menu_item_history -> {
+                activity?.supportFragmentManager.apply {
+                this?.beginTransaction()
+                    ?.add(R.id.container, HistoryFragment.newInstance())
+                    ?.addToBackStack("")
+                    ?.commitAllowingStateLoss()
+            }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateView(
@@ -101,10 +115,12 @@ class MainFragment : Fragment() {
 
     private fun loadMovies() {
         activity?.let {
-            isDataSetMovie = it.getPreferences(Context.MODE_PRIVATE).getBoolean(SharedPrefsConstants.IS_MOVIES_KEY,true)
-            isAdultMovie = it.getPreferences(Context.MODE_PRIVATE).getBoolean(SharedPrefsConstants.IS_ADULT_KEY,true)
+            isDataSetMovie = it.getPreferences(Context.MODE_PRIVATE)
+                .getBoolean(SharedPrefsConstants.IS_MOVIES_KEY, true)
+            isAdultMovie = it.getPreferences(Context.MODE_PRIVATE)
+                .getBoolean(SharedPrefsConstants.IS_ADULT_KEY, true)
         }
-        viewModel.getMovieFromLocalSource(isDataSetMovie,isAdultMovie)
+        viewModel.getMovieFromLocalSource(isDataSetMovie, isAdultMovie)
     }
 
     private fun changeMovieDataset() {
@@ -112,7 +128,7 @@ class MainFragment : Fragment() {
         val sharedPrefs = activity?.getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPrefs?.edit()
         editor?.let {
-            it.putBoolean(SharedPrefsConstants.IS_MOVIES_KEY,isDataSetMovie)
+            it.putBoolean(SharedPrefsConstants.IS_MOVIES_KEY, isDataSetMovie)
             it.apply()
         }
         loadMovies()

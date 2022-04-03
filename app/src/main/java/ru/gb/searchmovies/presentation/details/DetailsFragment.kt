@@ -76,6 +76,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun displayMovie(movie: Movie) {
+        viewModel.saveMovieToDb(movie)
         with(binding) {
             mainView.visibility = View.VISIBLE
             loadingLayout.visibility = View.GONE
