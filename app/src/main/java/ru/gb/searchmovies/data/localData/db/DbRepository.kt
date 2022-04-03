@@ -10,7 +10,7 @@ class DbRepository(private val datasource:HistoryDao):IDbRepository {
     override fun getAllHistory(): List<HistoryEntity> = datasource.all()
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override fun saveEntity(movie: Movie) {
-        datasource.insert(convertMovieToEntity(movie))
+    override fun saveEntity(movie: Movie, note: String) {
+        datasource.insert(convertMovieToEntity(movie, note))
     }
 }

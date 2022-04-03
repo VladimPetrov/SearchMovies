@@ -5,5 +5,5 @@ import ru.gb.searchmovies.data.dto.Movie
 
 interface IDbRepository {
     fun getAllHistory(): List<HistoryEntity>
-    fun saveEntity(movie: Movie)
+    fun saveEntity(movie: Movie, note: String)
 }

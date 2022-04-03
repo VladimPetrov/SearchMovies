@@ -30,8 +30,8 @@ class DetailsViewModel(
 ) : ViewModel() {
     val liveDate: LiveData<AppState> get() = detailsLiveData
 
-    fun saveMovieToDb(movie: Movie) {
-        dbRepository.saveEntity(movie)
+    fun saveMovieToDb(movie: Movie, note:String) {
+        dbRepository.saveEntity(movie, note)
     }
     fun getMovieFromRemoteSource(idMovie: Int) {
         detailsLiveData.postValue(AppState.Loading)

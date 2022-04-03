@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -58,18 +59,22 @@ class DetailsFragment : Fragment() {
                 item.isVisible = false
                 menu.findItem(R.id.details_menu_item_cancel).isVisible = true
                 menu.findItem(R.id.details_menu_item_OK).isVisible = true
+                binding.noteUser.isVisible = true
                 true
             }
             R.id.details_menu_item_OK -> {
                 item.isVisible = false
                 menu.findItem(R.id.details_menu_item_cancel).isVisible = false
                 menu.findItem(R.id.details_menu_item_add).isVisible = true
+                viewModel.saveMovieToDb(movieBundle,binding.noteUser.text.toString())
                 true
             }
             R.id.details_menu_item_cancel -> {
                 item.isVisible = false
                 menu.findItem(R.id.details_menu_item_OK).isVisible = false
                 menu.findItem(R.id.details_menu_item_add).isVisible = true
+                binding.noteUser.text.clear()
+                binding.noteUser.isVisible = false
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -106,7 +111,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun displayMovie(movie: Movie) {
-        viewModel.saveMovieToDb(movie)
+        viewModel.saveMovieToDb(movie,"нет заметки")
         with(binding) {
             mainView.visibility = View.VISIBLE
             loadingLayout.visibility = View.GONE

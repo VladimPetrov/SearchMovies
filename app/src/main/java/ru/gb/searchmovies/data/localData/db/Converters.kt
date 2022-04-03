@@ -8,10 +8,10 @@ import ru.gb.searchmovies.data.dto.Movie
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.N)
-fun convertMovieToEntity(movie: Movie): HistoryEntity {
+fun convertMovieToEntity(movie: Movie, note: String): HistoryEntity {
     val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
     return HistoryEntity(
-        0, movie.id, movie.name,"нет заметок",
+        0, movie.id, movie.name, note,
                 sdf.format(Date())
     )
 }

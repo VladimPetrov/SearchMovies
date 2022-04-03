@@ -79,6 +79,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/centralLinearLayout"
                 tools:text="@string/title_name_test" />
+            <EditText
+                android:id="@+id/noteUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="@dimen/detail_text_size"
+                android:textColor="@color/color_note"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@id/titleMovieTextView"
+                tools:text="Заметка"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
