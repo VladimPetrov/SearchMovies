@@ -13,4 +13,5 @@
     <color name="fragmentBackground">#FFFFFF</color>
     <color name="colorDivider">#000000</color>
     <color name="colorItemHistoryNote">#1059AF</color>
+    <color name="menu_background_list">#0FA284</color>
 </resources>

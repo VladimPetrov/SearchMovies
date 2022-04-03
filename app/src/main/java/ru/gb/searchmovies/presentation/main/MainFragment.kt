@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
     })
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.min_screen_menu, menu)
+        inflater.inflate(R.menu.main_screen_menu, menu)
         activity?.let {
             isAdultMovie = it.getPreferences(Context.MODE_PRIVATE)
                 .getBoolean(SharedPrefsConstants.IS_ADULT_KEY, true)
@@ -81,7 +81,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
         return binding.root
     }
 

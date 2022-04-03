@@ -2,9 +2,7 @@ package ru.gb.searchmovies.presentation.details
 
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +17,7 @@ class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+    private lateinit var menu: Menu
     private lateinit var movieBundle: Movie
     private val viewModel: DetailsViewModel by lazy {
         ViewModelProvider(this)[DetailsViewModel::class.java]
@@ -31,6 +30,7 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -44,6 +44,36 @@ class DetailsFragment : Fragment() {
             renderData(appState)
         })
         loadMovie()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        this.menu = menu
+        inflater.inflate(R.menu.details_screen_menu,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.details_menu_item_add -> {
+                item.isVisible = false
+                menu.findItem(R.id.details_menu_item_cancel).isVisible = true
+                menu.findItem(R.id.details_menu_item_OK).isVisible = true
+                true
+            }
+            R.id.details_menu_item_OK -> {
+                item.isVisible = false
+                menu.findItem(R.id.details_menu_item_cancel).isVisible = false
+                menu.findItem(R.id.details_menu_item_add).isVisible = true
+                true
+            }
+            R.id.details_menu_item_cancel -> {
+                item.isVisible = false
+                menu.findItem(R.id.details_menu_item_OK).isVisible = false
+                menu.findItem(R.id.details_menu_item_add).isVisible = true
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun loadMovie() {
