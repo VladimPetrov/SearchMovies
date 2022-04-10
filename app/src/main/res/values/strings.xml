@@ -5,4 +5,5 @@
     <string name="reload">Перезагрузка</string>
     <string name="option_menu_item_adult">adult</string>
     <string name="option_menu_item_history">История</string>
+    <string name="option_menu_item_contacts">Контакты</string>
 </resources>

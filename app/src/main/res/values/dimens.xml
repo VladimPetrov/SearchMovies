@@ -15,4 +15,7 @@
     <dimen name="fab_icon_size">56dp</dimen>
     <dimen name="fab_margin">15dp</dimen>
     <dimen name="margin_5_dp">5dp</dimen>
+    <dimen name="margin_15_dp">15dp</dimen>
+    <dimen name="main_container_contact_size">14sp</dimen>
+    <dimen name="main_container_number_size">10sp</dimen>
 </resources>

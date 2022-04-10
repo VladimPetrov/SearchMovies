@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import ru.gb.searchmovies.R
+import ru.gb.searchmovies.contentProvider.ContentProviderFragment
 import ru.gb.searchmovies.data.SharedPrefsConstants
 import ru.gb.searchmovies.data.states.AppState
 import ru.gb.searchmovies.data.dto.Movie
@@ -70,6 +71,15 @@ class MainFragment : Fragment() {
                     ?.addToBackStack("")
                     ?.commitAllowingStateLoss()
             }
+                true
+            }
+            R.id.option_menu_item_contacts -> {
+                activity?.supportFragmentManager.apply {
+                    this?.beginTransaction()
+                        ?.add(R.id.container, ContentProviderFragment.newInstance())
+                        ?.addToBackStack("")
+                        ?.commitAllowingStateLoss()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
