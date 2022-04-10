@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.gb.searchmovies.data.dto.ListMovieApi
 import ru.gb.searchmovies.data.dto.MovieDTO
 
 class RemoteDataSource {
@@ -21,5 +22,8 @@ class RemoteDataSource {
 
     fun getMovieDetails(idMovie: Int, callback: Callback<MovieDTO>) {
         movieApi.getMovie(idMovie).enqueue(callback)
+    }
+    fun getMovieList(query : String, isAdultMovie:Boolean, callback: Callback<ListMovieApi>) {
+        movieApi.getListMovie(query = query,includeAdult = isAdultMovie.toString()).enqueue(callback)
     }
 }

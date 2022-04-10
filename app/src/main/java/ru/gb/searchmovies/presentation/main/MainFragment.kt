@@ -1,18 +1,18 @@
 package ru.gb.searchmovies.presentation.main
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import ru.gb.searchmovies.R
+import ru.gb.searchmovies.data.SharedPrefsConstants
 import ru.gb.searchmovies.data.states.AppState
 import ru.gb.searchmovies.data.dto.Movie
 import ru.gb.searchmovies.databinding.FragmentMainBinding
 import ru.gb.searchmovies.hide
 import ru.gb.searchmovies.presentation.details.DetailsFragment
+import ru.gb.searchmovies.presentation.history.HistoryFragment
 import ru.gb.searchmovies.show
 import ru.gb.searchmovies.showSnackBar
 
@@ -24,6 +24,7 @@ class MainFragment : Fragment() {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
     private var isDataSetMovie: Boolean = true
+    private var isAdultMovie: Boolean = false
     private val adapter = MainFragmentAdapter(object : onOnItemViewClickListener {
         override fun onItemClick(movie: Movie) {
             activity?.supportFragmentManager?.beginTransaction()
@@ -39,11 +40,48 @@ class MainFragment : Fragment() {
         }
     })
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_screen_menu, menu)
+        activity?.let {
+            isAdultMovie = it.getPreferences(Context.MODE_PRIVATE)
+                .getBoolean(SharedPrefsConstants.IS_ADULT_KEY, true)
+        }
+        menu.findItem(R.id.option_menu_item_adult).isChecked = isAdultMovie
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.option_menu_item_adult -> {
+                item.isChecked = !item.isChecked
+                val sharedPrefs = activity?.getPreferences(Context.MODE_PRIVATE)
+                val editor = sharedPrefs?.edit()
+                editor?.let {
+                    it.putBoolean(SharedPrefsConstants.IS_ADULT_KEY, isAdultMovie)
+                    it.apply()
+                }
+                loadMovies()
+                true
+            }
+            R.id.option_menu_item_history -> {
+                activity?.supportFragmentManager.apply {
+                this?.beginTransaction()
+                    ?.add(R.id.container, HistoryFragment.newInstance())
+                    ?.addToBackStack("")
+                    ?.commitAllowingStateLoss()
+            }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -51,8 +89,8 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.mainFragmentRecyclerView.adapter = adapter
         binding.mainFragmentFAB.setOnClickListener { changeMovieDataset() }
-        viewModel.liveDate.observe(viewLifecycleOwner, Observer { renderData(it) })
-        viewModel.getMovieFromLocalSource(isDataSetMovie)
+        viewModel.liveDate.observe(viewLifecycleOwner, { renderData(it) })
+        loadMovies()
     }
 
     private fun renderData(appState: AppState) {
@@ -69,15 +107,31 @@ class MainFragment : Fragment() {
                 binding.mainFragmentFAB.showSnackBar(
                     text = R.string.error,
                     actionText = R.string.reload,
-                    action = { viewModel.getMovieFromLocalSource(isDataSetMovie) }
+                    action = { loadMovies() }
                 )
             }
         }
     }
 
+    private fun loadMovies() {
+        activity?.let {
+            isDataSetMovie = it.getPreferences(Context.MODE_PRIVATE)
+                .getBoolean(SharedPrefsConstants.IS_MOVIES_KEY, true)
+            isAdultMovie = it.getPreferences(Context.MODE_PRIVATE)
+                .getBoolean(SharedPrefsConstants.IS_ADULT_KEY, true)
+        }
+        viewModel.getMovieFromLocalSource(isDataSetMovie, isAdultMovie)
+    }
+
     private fun changeMovieDataset() {
         isDataSetMovie = !isDataSetMovie
-        viewModel.getMovieFromLocalSource(isDataSetMovie)
+        val sharedPrefs = activity?.getPreferences(Context.MODE_PRIVATE)
+        val editor = sharedPrefs?.edit()
+        editor?.let {
+            it.putBoolean(SharedPrefsConstants.IS_MOVIES_KEY, isDataSetMovie)
+            it.apply()
+        }
+        loadMovies()
     }
 
     companion object {
