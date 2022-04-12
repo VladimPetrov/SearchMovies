@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1021510622234",
+    "project_id": "searchmovies-d222f",
+    "storage_bucket": "searchmovies-d222f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021510622234:android:d138c0c9f1e04021d045a3",
+        "android_client_info": {
+          "package_name": "ru.gb.searchmovies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021510622234-un8gbjas4m28pha2nolsd6o0or3sj09k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjLrgs7JXx837MKIxPSYwXqmUBN6m-tbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021510622234-un8gbjas4m28pha2nolsd6o0or3sj09k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

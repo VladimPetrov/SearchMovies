@@ -14,6 +14,7 @@ import ru.gb.searchmovies.databinding.FragmentMainBinding
 import ru.gb.searchmovies.hide
 import ru.gb.searchmovies.presentation.details.DetailsFragment
 import ru.gb.searchmovies.presentation.history.HistoryFragment
+import ru.gb.searchmovies.presentation.maps.MapsFragment
 import ru.gb.searchmovies.show
 import ru.gb.searchmovies.showSnackBar
 
@@ -65,24 +66,27 @@ class MainFragment : Fragment() {
                 true
             }
             R.id.option_menu_item_history -> {
-                activity?.supportFragmentManager.apply {
-                this?.beginTransaction()
-                    ?.add(R.id.container, HistoryFragment.newInstance())
-                    ?.addToBackStack("")
-                    ?.commitAllowingStateLoss()
-            }
+                showFragment(HistoryFragment.newInstance())
                 true
             }
             R.id.option_menu_item_contacts -> {
-                activity?.supportFragmentManager.apply {
-                    this?.beginTransaction()
-                        ?.add(R.id.container, ContentProviderFragment.newInstance())
-                        ?.addToBackStack("")
-                        ?.commitAllowingStateLoss()
-                }
+                showFragment(ContentProviderFragment.newInstance())
+                true
+            }
+            R.id.option_menu_item_map -> {
+                showFragment(MapsFragment())
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showFragment(fragment : Fragment) {
+        activity?.supportFragmentManager.apply {
+            this?.beginTransaction()
+                ?.add(R.id.container, fragment)
+                ?.addToBackStack("")
+                ?.commitAllowingStateLoss()
         }
     }
 
