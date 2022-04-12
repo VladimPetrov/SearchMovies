@@ -6,4 +6,9 @@
     <string name="option_menu_item_adult">adult</string>
     <string name="option_menu_item_history">История</string>
     <string name="option_menu_item_contacts">Контакты</string>
+    <string name="option_menu_item_map">Карты</string>
+    <string name="button_search_map">Поиск</string>
+    <string name="title_activity_maps_fragment">MapsFragment</string>
+    <string name="default_search_address">Red Square, 1, Moscow</string>
+    <string name="marker_start">Start</string>
 </resources>
